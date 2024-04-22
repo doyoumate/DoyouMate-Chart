@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Values.db.redis.name }}
+spec:
+  serviceName: {{ .Values.service.redis.name }}
+  replicas: {{ .Values.db.redis.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.db.redis.label }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.db.redis.label }}
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: redis
+        image: redis:7
+        command: ["redis-server","/redis-master/redis.conf"]
+        ports:
+        - containerPort: 27017
+        volumeMounts:
+        - mountPath: /redis-master-data
+          name: data
+        - mountPath: /redis-master
+          name: config
+        resources:
+          limits:
+            cpu: {{ .Values.db.redis.cpuLimit }}
+      volumes:
+      - name: data
+        emptyDir: {}
+      - name: config
+        configMap:
+          name: {{ .Values.db.redis.configMap.name }}
+          items:
+          - key: redis-config
+            path: redis.conf

@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.controller.api.name }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.controller.api.label }}
+  replicas: {{ .Values.controller.api.replicas }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.controller.api.label }}
+    spec:
+      containers:
+      - name: {{ .Values.controller.api.containerName }}
+        image: {{ .Values.controller.api.image.name }}:{{ .Values.controller.api.image.tag }}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: {{ .Values.env }}
+        envFrom:
+        - secretRef:
+            name: doyoumate-{{ .Values.env }}
+      imagePullSecrets:
+      - name: docker-secret

@@ -1,0 +1,37 @@
+env: dev
+controller:
+  api:
+    name: doyoumate-api
+    label: api
+    containerName: doyoumate-api
+    replicas: 1
+    image:
+      name: san06036/doyoumate-api
+      tag:
+service:
+  api:
+    name: api-service
+  mongodb:
+    name: mongodb-service
+  redis:
+    name: redis-service
+db:
+  mongodb:
+    name: doyoumate-mongodb
+    replicas: 1
+    label: mongodb
+    storage:
+      name: mongodb-storage
+      accessMode: ReadWriteOnce
+      request: 1Gi
+  redis:
+    name: doyoumate-redis
+    replicas: 1
+    label: redis
+    cpuLimit: 0.1
+    configMap:
+      name: redis-config
+ingress:
+  name: doyoumate-ingress
+  className: nginx
+  annotations:

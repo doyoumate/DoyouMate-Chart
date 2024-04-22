@@ -1,0 +1,10 @@
+.DS_Store
+
+### IntelliJ IDEA ###
+.idea/
+
+### VS Code ###
+.vscode/
+
+### Secret ###
+secret.yaml
