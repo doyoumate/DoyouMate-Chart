@@ -3,9 +3,9 @@ kind: Service
 metadata:
   name: {{ .Values.service.mongodb.name }}
 spec:
-  clusterIP: None
   selector:
     app: {{ .Values.db.mongodb.label }}
   ports:
     - protocol: TCP
       port: 27017
+  type: ClusterIP

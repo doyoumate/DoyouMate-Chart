@@ -17,21 +17,21 @@ spec:
       containers:
       - name: redis
         image: redis:7
-        command: ["redis-server","/redis-master/redis.conf"]
+        command: ["redis-server", "/config/redis.conf"]
         ports:
         - containerPort: 27017
         volumeMounts:
-        - mountPath: /redis-master-data
-          name: data
-        - mountPath: /redis-master
-          name: config
+        - name: redis-storage
+          mountPath: /data/db
+        - name: redis-config
+          mountPath: /config
         resources:
           limits:
             cpu: {{ .Values.db.redis.cpuLimit }}
       volumes:
-      - name: data
+      - name: redis-storage
         emptyDir: {}
-      - name: config
+      - name: redis-config
         configMap:
           name: {{ .Values.db.redis.configMap.name }}
           items:

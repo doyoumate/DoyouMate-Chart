@@ -3,9 +3,9 @@ kind: Service
 metadata:
   name: {{.Values.service.redis.name}}
 spec:
-  clusterIP: None
   selector:
     app: {{.Values.db.redis.label}}
   ports:
     - protocol: TCP
       port: 6379
+  type: ClusterIP
