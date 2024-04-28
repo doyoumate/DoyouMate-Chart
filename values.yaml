@@ -34,4 +34,3 @@ db:
 ingress:
   name: doyoumate-ingress
   className: nginx
-  annotations:
