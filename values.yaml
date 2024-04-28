@@ -8,6 +8,11 @@ controller:
     image:
       name: san06036/doyoumate-api
       tag:
+  batch:
+    containerName: doyoumate-batch
+    image:
+      name: san06036/doyoumate-batch
+      tag:
 service:
   api:
     name: api-service
@@ -34,3 +39,8 @@ db:
 ingress:
   name: doyoumate-ingress
   className: nginx
+jobs:
+- name: synchronizeLecturesJob
+  schedule: 0 3 * * *
+- name: synchronizeStudentsJob
+  schedule: 0 3 * * *
