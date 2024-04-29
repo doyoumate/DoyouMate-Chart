@@ -44,3 +44,5 @@ jobs:
   schedule: 0 3 * * *
 - name: synchronizeStudentsJob
   schedule: 0 3 * * *
+secret:
+  name: doyoumate-secret

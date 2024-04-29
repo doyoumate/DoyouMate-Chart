@@ -23,6 +23,6 @@ spec:
           value: {{ .Values.env }}
         envFrom:
         - secretRef:
-            name: doyoumate-{{ .Values.env }}
+            name: {{ $.Values.secret.name }}
       imagePullSecrets:
       - name: docker-secret
