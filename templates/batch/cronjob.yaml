@@ -13,7 +13,7 @@ spec:
           restartPolicy: OnFailure
           containers:
           - name: {{ $.Values.controller.batch.containerName }}
-            image: {{ $.Values.controller.batch.image }}:{{ $.Values.controller.batch.image.tag }}
+            image: {{ $.Values.controller.batch.image.name }}:{{ $.Values.controller.batch.image.tag }}
             imagePullPolicy: Always
             env:
             - name: SPRING_PROFILES_ACTIVE
