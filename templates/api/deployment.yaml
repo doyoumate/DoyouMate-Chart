@@ -19,6 +19,8 @@ spec:
         ports:
         - containerPort: 8080
         env:
+        - name: JAVA_OPTS
+          value: -Duser.timezone=Asia/Seoul
         - name: SPRING_PROFILES_ACTIVE
           value: {{ .Values.env }}
         envFrom:
