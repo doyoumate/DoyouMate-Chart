@@ -6,6 +6,7 @@ metadata:
   name: {{ kebabcase .name }}
 spec:
   schedule: {{ .schedule }}
+  timeZone: 'Asia/Seoul'
   jobTemplate:
     spec:
       template:
@@ -16,6 +17,8 @@ spec:
             image: {{ $.Values.controller.batch.image.name }}:{{ $.Values.controller.batch.image.tag }}
             imagePullPolicy: Always
             env:
+            - name: JAVA_OPTS
+              value: -Duser.timezone=Asia/Seoul
             - name: SPRING_PROFILES_ACTIVE
               value: {{ $.Values.env }}
             - name: JOB
