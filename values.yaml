@@ -8,6 +8,14 @@ controller:
     image:
       name: san06036/doyoumate-api
       tag:
+  chat:
+    name: doyoumate-chat
+    label: chat
+    containerName: doyoumate-chat
+    replicas: 1
+    image:
+      name: san06036/doyoumate-chat
+      tag:
   batch:
     containerName: doyoumate-batch
     image:
@@ -16,6 +24,8 @@ controller:
 service:
   api:
     name: api-service
+  chat:
+    name: chat-service
   mongodb:
     name: mongodb-service
   redis:
