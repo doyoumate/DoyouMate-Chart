@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.controller.chat.name }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.controller.chat.label }}
+  replicas: {{ .Values.controller.chat.replicas }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.controller.chat.label }}
+    spec:
+      containers:
+      - name: {{ .Values.controller.chat.containerName }}
+        image: {{ .Values.controller.chat.image.name }}:{{ .Values.controller.chat.image.tag }}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        env:
+        - name: JAVA_OPTS
+          value: -Duser.timezone=Asia/Seoul
+        - name: SPRING_PROFILES_ACTIVE
+          value: {{ .Values.env }}
+        envFrom:
+        - secretRef:
+            name: {{ $.Values.secret.name }}
+      imagePullSecrets:
+      - name: docker-secret
