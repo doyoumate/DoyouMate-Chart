@@ -16,3 +16,10 @@ spec:
             name: {{ .Values.service.api.name }}
             port:
               number: 80
+      - path: /chat(/|$)(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ .Values.service.chat.name }}
+            port:
+              number: 80
