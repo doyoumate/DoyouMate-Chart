@@ -40,9 +40,11 @@ ingress:
   name: doyoumate-ingress
   className: nginx
 jobs:
-- name: synchronizeLecturesJob
-  schedule: 0 3 * * *
-- name: synchronizeStudentsJob
-  schedule: 0 3 * * *
+- name: updateLecturesJob
+  schedule: 0 0 * * *
+- name: updateProfessorsJob
+  schedule: 0 1 * * *
+- name: updateStudentsJob
+  schedule: 0 2 * * *
 secret:
   name: doyoumate-secret
