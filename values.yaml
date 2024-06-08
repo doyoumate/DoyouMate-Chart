@@ -23,7 +23,7 @@ service:
 db:
   mongodb:
     name: doyoumate-mongodb
-    replicas: 1
+    replicas: 3
     label: mongodb
     storage:
       name: mongodb-storage
